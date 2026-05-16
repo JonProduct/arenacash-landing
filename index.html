@@ -4,54 +4,381 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ArenaCash — Sua conta digital</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #0b0f0d;
-      --ink: #f3efe6;
-      --accent: #d4ff3a;
-      --muted: #8a8f86;
+      --red:        #FF494C;
+      --red-hover:  #E63B3E;
+      --red-press:  #C8282B;
+      --black:      #0A0A0A;
+      --white:      #FFFFFF;
+      --n900:       #141414;
+      --n700:       #333333;
+      --n500:       #7A7A7A;
+      --n300:       #D1D1D1;
+      --n100:       #F2F2F2;
+      --surf-sec:   #F9F9F9;
     }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    .wrap { max-width: 720px; margin: 0 auto; padding: 80px 24px 60px; }
-    .brand { font-size: 14px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
-    h1 { font-size: 64px; line-height: 1.05; margin: 0 0 16px; font-weight: 800; }
-    .subtitle { font-size: 22px; line-height: 1.4; color: var(--ink); opacity: 0.85; margin: 0 0 40px; }
-    .cta { display: inline-block; background: var(--accent); color: var(--bg); padding: 18px 28px; border-radius: 999px; font-weight: 700; font-size: 18px; text-decoration: none; }
-    .cta:hover { transform: translateY(-1px); }
-    .features { margin-top: 80px; display: grid; gap: 24px; }
-    .feature { border-top: 1px solid #1c211e; padding-top: 16px; }
-    .feature h3 { margin: 0 0 6px; font-size: 18px; }
-    .feature p { margin: 0; color: var(--muted); font-size: 15px; }
-    footer { margin-top: 80px; color: var(--muted); font-size: 13px; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      background: var(--white);
+      color: var(--n900);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 24px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .logo-symbol {
+      width: 32px;
+      height: 32px;
+      background: var(--red);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .logo-symbol svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--white);
+    }
+
+    .logo-wordmark {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 900;
+      font-size: 18px;
+      color: var(--black);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-cta {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid var(--n300);
+      color: var(--n900);
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background 150ms;
+    }
+
+    .nav-cta:hover { background: var(--surf-sec); }
+
+    /* ── Hero ── */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 24px 64px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 900;
+      font-size: 64px;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+
+    h1 span { color: var(--red); }
+
+    .subtitle {
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--n700);
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(255, 73, 76, 0.25);
+      transition: background 150ms, transform 150ms, box-shadow 150ms;
+    }
+
+    .btn-primary:hover {
+      background: var(--red-hover);
+      box-shadow: 0 12px 28px rgba(255, 73, 76, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+      background: var(--red-press);
+      transform: translateY(1px);
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--red);
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+    }
+
+    .btn-secondary:hover { text-decoration: underline; }
+
+    /* ── Divider ── */
+    .divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      border: none;
+      border-top: 1px solid var(--n300);
+    }
+
+    /* ── Features ── */
+    .features {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 24px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--n300);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 150ms;
+    }
+
+    .feature-card:hover { border-color: var(--red); }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--n100);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--red);
+    }
+
+    .feature-card h3 {
+      font-family: 'Archivo', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--n900);
+      margin-bottom: 8px;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--n500);
+    }
+
+    /* ── Stats ── */
+    .stats {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 32px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--n500);
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-family: 'Inter', sans-serif;
+      font-variant-numeric: tabular-nums;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--black);
+      line-height: 1.1;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--n300);
+      background: var(--n100);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--n500);
+    }
+
+    .footer-pa {
+      font-family: 'Archivo', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--n700);
+    }
+
+    .footer-pa span { color: var(--red); }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 40px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="brand">ArenaCash</div>
 
-    <h1>ArenaCash</h1>
-
-    <p class="subtitle">O cash da nova economia.</p>
-
-    <a href="#abrir-conta" class="cta">Abra sua conta</a>
-
-    <div class="features">
-      <div class="feature">
-        <h3>Conta sem tarifa</h3>
-        <p>Zero mensalidade, zero TED, zero pegadinha.</p>
+  <!-- Nav -->
+  <nav>
+    <a href="/" class="logo">
+      <div class="logo-symbol">
+        <!-- A estilizado -->
+        <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 2L2 15h3.5l1.2-2.8h4.6L12.5 15H16L9 2Zm0 4.5 1.6 3.7H7.4L9 6.5Z"/>
+        </svg>
       </div>
-      <div class="feature">
-        <h3>Pix instantâneo</h3>
-        <p>Envia e recebe na hora, 24/7.</p>
-      </div>
-      <div class="feature">
-        <h3>Cartão virtual em 90 segundos</h3>
-        <p>Aprovado direto no app, sem espera.</p>
-      </div>
+      <span class="logo-wordmark">arenacash</span>
+    </a>
+    <a href="#abrir-conta" class="nav-cta">Abra sua conta</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="eyebrow">A R E N A C A S H</span>
+    <h1>Sua conta digital<br>em <span>90 segundos.</span></h1>
+    <p class="subtitle">Zero mensalidade, Pix 24/7 e cartão virtual na hora. Tudo no seu celular, sem pegadinha.</p>
+    <div class="cta-group">
+      <a href="#abrir-conta" class="btn-primary" id="abrir-conta">Comece agora</a>
+      <a href="#como-funciona" class="btn-secondary">Como funciona →</a>
     </div>
+  </section>
 
-    <footer>© ArenaCash · Uma fintech fictícia da Product Arena.</footer>
-  </div>
+  <hr class="divider" />
+
+  <!-- Stats -->
+  <section class="stats" id="como-funciona">
+    <div>
+      <div class="stat-label">Clientes ativos</div>
+      <div class="stat-value">51 mil</div>
+    </div>
+    <div>
+      <div class="stat-label">Mensalidade</div>
+      <div class="stat-value">R$ 0</div>
+    </div>
+    <div>
+      <div class="stat-label">Tempo de abertura</div>
+      <div class="stat-value">90 seg</div>
+    </div>
+    <div>
+      <div class="stat-label">Suporte</div>
+      <div class="stat-value">24/7</div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- Features -->
+  <section class="features">
+    <div class="feature-card">
+      <div class="feature-icon">
+        <!-- Ícone Lucide: zap -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <h3>Pix instantâneo</h3>
+      <p>Envia e recebe na hora, 24/7. Sem limite de horário, sem taxa.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <!-- Ícone Lucide: credit-card -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="22" height="16" x="1" y="4" rx="2"/><path d="M1 10h22"/></svg>
+      </div>
+      <h3>Cartão virtual em 90 segundos</h3>
+      <p>Aprovado direto no app. Já pode usar nas compras online na hora.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">
+        <!-- Ícone Lucide: shield-check -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <h3>Conta sem tarifa</h3>
+      <p>Zero mensalidade, zero TED, zero surpresa no extrato.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2026 ArenaCash · Todos os direitos reservados</span>
+      <span class="footer-pa"><span>PRODUCT</span> ARENA · na prática, a teoria é BEM diferente.</span>
+    </div>
+  </footer>
+
 </body>
 </html>
